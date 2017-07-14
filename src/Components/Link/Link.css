@@ -1,0 +1,16 @@
+.image {
+  display: inline-block;
+  border-style: hidden;
+  height: 125px;
+  width: 125px;
+  padding: 20px;
+}
+
+.link .text{
+  color: black;
+  width: 200px;
+  border: solid;
+  border-top: hidden;
+  padding: 10px;
+  border-color: gray;
+}
