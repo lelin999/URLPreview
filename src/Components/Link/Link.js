@@ -13,6 +13,7 @@ class Link extends Component {
       title: '',
       description: '',
       image: '',
+      url: '',
       bad_website: false
     }
   }
@@ -33,7 +34,7 @@ class Link extends Component {
                 <h6>{this.state.description}</h6>
               </div>
               <div className="url">
-                <h6>{this.state.link}</h6>
+                <h6>{this.state.url}</h6>
               </div>
             </div>
           </a>
@@ -66,16 +67,19 @@ class Link extends Component {
       .scrapeUrl(this.state.link)
       .then((metadata) => {
         console.log(metadata)
+        console.log(this.state)
         if (metadata.title && metadata.description && metadata.image) {
-          this.setState({title: metadata.title, description: metadata.description, image: metadata.image, bad_website: false})  
-        }
-        
-        if (!this.state.description) {
-          this.setState({description: `Visit ${this.state.title}!`});
-        }
+          this.setState({title: metadata.title, description: metadata.description, image: metadata.image, url: metadata.url, bad_website: false});
+          if (!metadata.url) {
+            this.setState({url: this.state.link});
+          }
+          if (!this.state.description) {
+            this.setState({description: `Visit ${this.state.title}!`});
+          }
+        } 
     }).catch((err) => {
       console.log(err)
-      this.setState({bad_website: true});
+      this.setState({image: '', bad_website: true});
     })
   }
 }
